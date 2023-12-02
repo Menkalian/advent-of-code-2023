@@ -41,12 +41,16 @@ fun createTemplates() {
     val downloadedUntil = findLatestDayExisting()
     println("Files exist until day $downloadedUntil")
 
+    var downloadDay = date.dayOfMonth
+    if (date.hour < 6) {
+        downloadDay--
+    }
     if (date.monthValue == Month.DECEMBER.value
-        && date.dayOfMonth > downloadedUntil
+        && downloadDay > downloadedUntil
     ) {
-        println("Downloading until ${date.dayOfMonth}")
+        println("Downloading until $downloadDay")
 
-        for (n in (downloadedUntil + 1)..date.dayOfMonth) {
+        for (n in (downloadedUntil + 1)..downloadDay) {
             if (n > 25) {
                 continue
             }
