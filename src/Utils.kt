@@ -1,3 +1,4 @@
+import java.lang.RuntimeException
 import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
@@ -19,3 +20,9 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+fun <T> check(actual: T, expected: T) {
+    if (actual != expected) {
+        throw RuntimeException("Check failed: actual was $actual while $expected was expected.")
+    }
+}
